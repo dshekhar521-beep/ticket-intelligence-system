@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ticket Intelligence Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <button
+                class="sidebar-toggle"
+                id="sidebarToggle"
+                type="button"
+                aria-label="Toggle sidebar">
+            ‹
+        </button>
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                TI
+            </div>
+
+            <div class="logo-text">
+                <h2>Ticket Intelligence</h2>
+                <p>Support Analytics</p>
+            </div>
+
+        </div>
+
+        <nav>
+
+            <a class="nav-item active" href="#dashboard">
+                <span>▣</span>
+                <label>Dashboard</label>
+            </a>
+
+            <a class="nav-item" href="#create-ticket">
+                <span>＋</span>
+                <label>Create Ticket</label>
+            </a>
+
+            <a class="nav-item" href="#tickets">
+                <span>◉</span>
+                <label>Tickets</label>
+            </a>
+
+            <a class="nav-item" href="#intelligence">
+                <span>⚡</span>
+                <label>Intelligence</label>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-footer">
+
+            <div class="status-dot"></div>
+
+            <span>
+                System Online
+            </span>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main">
+
+
+        <!-- ================= HEADER ================= -->
+
+        <header class="header" id="dashboard">
+
+            <div>
+
+                <p class="eyebrow">
+                    SUPPORT OPERATIONS
+                </p>
+
+                <h1>
+                    Ticket Intelligence Dashboard
+                </h1>
+
+                <p>
+                    Monitor customer support activity and prioritize
+                    high-impact issues.
+                </p>
+
+            </div>
+
+
+            <div class="header-actions">
+
+                <button
+                        class="refresh-btn"
+                        type="button"
+                        onclick="refreshEverything()">
+                    ↻ Refresh
+                </button>
+
+
+                <form action="/logout" method="post">
+
+                    <button
+                            class="logout-btn"
+                            type="submit">
+                        Logout
+                    </button>
+
+                </form>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- ================= STATISTICS ================= -->
+
+        <section class="stats-grid">
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Total Tickets
+                </div>
+
+                <div
+                        class="stat-value"
+                        id="totalTickets">
+                    0
+                </div>
+
+                <div class="stat-description">
+                    All support tickets
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Open Tickets
+                </div>
+
+                <div
+                        class="stat-value"
+                        id="openTickets">
+                    0
+                </div>
+
+                <div class="stat-description">
+                    Waiting for resolution
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Critical
+                </div>
+
+                <div
+                        class="stat-value critical"
+                        id="criticalTickets">
+                    0
+                </div>
+
+                <div class="stat-description">
+                    Requires immediate attention
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    High Priority
+                </div>
+
+                <div
+                        class="stat-value high"
+                        id="highPriorityTickets">
+                    0
+                </div>
+
+                <div class="stat-description">
+                    Important customer issues
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Negative Sentiment
+                </div>
+
+                <div
+                        class="stat-value negative"
+                        id="negativeSentimentTickets">
+                    0
+                </div>
+
+                <div class="stat-description">
+                    Unhappy customers
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Escalation Risk
+                </div>
+
+                <div
+                        class="stat-value escalation"
+                        id="highEscalationRiskTickets">
+                    0
+                </div>
+
+                <div class="stat-description">
+                    High-risk tickets
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= INTELLIGENCE OVERVIEW ================= -->
+
+        <section
+                class="overview"
+                id="intelligence">
+
+            <div class="overview-card">
+
+                <div>
+
+                    <p class="overview-label">
+                        Average Priority Score
+                    </p>
+
+                    <div class="score-row">
+
+                        <span id="averagePriorityScore">
+                            0.0
+                        </span>
+
+                        <span class="score-max">
+                            / 100
+                        </span>
+
+                    </div>
+
+                    <p class="overview-note">
+                        Overall ticket impact level
+                    </p>
+
+                </div>
+
+
+                <div class="score-circle">
+                    AI
+                </div>
+
+            </div>
+
+
+
+            <div class="overview-card">
+
+                <div>
+
+                    <p class="overview-label">
+                        Intelligence Engine
+                    </p>
+
+                    <div class="system-status">
+
+                        <span class="status-dot"></span>
+
+                        Active
+
+                    </div>
+
+                    <p class="overview-note">
+                        Category, sentiment, urgency and risk analysis
+                    </p>
+
+                </div>
+
+
+                <div class="engine-icon">
+                    ⚡
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= INTELLIGENCE CENTER ================= -->
+
+        <section class="section-card">
+
+            <div class="section-header">
+
+                <div>
+
+                    <p class="eyebrow">
+                        AI PRIORITIZATION
+                    </p>
+
+                    <h2>
+                        Intelligence Center
+                    </h2>
+
+                    <p>
+                        Focus first on tickets with the strongest
+                        business-impact signals.
+                    </p>
+
+                </div>
+
+
+                <button
+                        class="primary-btn"
+                        type="button"
+                        onclick="scrollToTickets()">
+
+                    View All Tickets
+
+                </button>
+
+            </div>
+
+
+            <div class="risk-summary">
+
+                <div class="risk-box">
+
+                    <span>
+                        Critical
+                    </span>
+
+                    <strong id="centerCritical">
+                        0
+                    </strong>
+
+                    <small>
+                        Immediate attention
+                    </small>
+
+                </div>
+
+
+                <div class="risk-box">
+
+                    <span>
+                        High Priority
+                    </span>
+
+                    <strong id="centerHigh">
+                        0
+                    </strong>
+
+                    <small>
+                        Important issues
+                    </small>
+
+                </div>
+
+
+                <div class="risk-box">
+
+                    <span>
+                        High Escalation
+                    </span>
+
+                    <strong id="centerEscalation">
+                        0
+                    </strong>
+
+                    <small>
+                        Escalation signals
+                    </small>
+
+                </div>
+
+
+                <div class="risk-box">
+
+                    <span>
+                        Negative Sentiment
+                    </span>
+
+                    <strong id="centerNegative">
+                        0
+                    </strong>
+
+                    <small>
+                        Customer dissatisfaction
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="high-risk-area">
+
+                <div class="subsection-title">
+
+                    <h3>
+                        Highest Priority Tickets
+                    </h3>
+
+                    <p>
+                        Sorted by explainable priority score.
+                    </p>
+
+                </div>
+
+
+                <div
+                        id="highRiskTickets"
+                        class="high-risk-list">
+
+                    <div class="empty-state">
+                        Loading intelligence...
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= CREATE TICKET ================= -->
+
+        <section
+                class="section-card"
+                id="create-ticket">
+
+            <div class="section-header">
+
+                <div>
+
+                    <p class="eyebrow">
+                        NEW CASE
+                    </p>
+
+                    <h2>
+                        Create New Ticket
+                    </h2>
+
+                    <p>
+                        Enter a customer issue. The intelligence engine
+                        will automatically analyze it.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <form id="ticketForm">
+
+
+                <div class="form-group">
+
+                    <label for="ticketTitle">
+                        Ticket Title
+                    </label>
+
+                    <input
+                            type="text"
+                            id="ticketTitle"
+                            maxlength="150"
+                            placeholder="Example: Payment charged twice"
+                            required>
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label for="ticketDescription">
+                        Customer Description
+                    </label>
+
+                    <textarea
+                            id="ticketDescription"
+                            rows="5"
+                            maxlength="5000"
+                            placeholder="Describe the customer's problem..."
+                            required></textarea>
+
+                    <div class="field-hint">
+                        The description is used for ticket intelligence analysis.
+                    </div>
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label for="ticketStatus">
+                        Status
+                    </label>
+
+                    <select id="ticketStatus">
+
+                        <option value="OPEN">
+                            OPEN
+                        </option>
+
+                        <option value="IN_PROGRESS">
+                            IN_PROGRESS
+                        </option>
+
+                        <option value="RESOLVED">
+                            RESOLVED
+                        </option>
+
+                        <option value="CLOSED">
+                            CLOSED
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <button
+                        type="submit"
+                        class="create-btn">
+
+                    Analyze &amp; Create Ticket
+
+                </button>
+
+            </form>
+
+        </section>
+
+
+
+        <!-- ================= INTELLIGENCE RESULT ================= -->
+
+        <section
+                class="section-card result-section"
+                id="intelligenceResult"
+                style="display:none;">
+
+            <div class="section-header">
+
+                <div>
+
+                    <p class="eyebrow">
+                        ANALYSIS COMPLETE
+                    </p>
+
+                    <h2>
+                        AI Intelligence Result
+                    </h2>
+
+                    <p>
+                        Automatically generated from the customer description.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="result-grid">
+
+
+                <div class="result-item">
+
+                    <span>
+                        Category
+                    </span>
+
+                    <strong id="resultCategory">
+                        -
+                    </strong>
+
+                </div>
+
+
+
+                <div class="result-item">
+
+                    <span>
+                        Priority
+                    </span>
+
+                    <strong id="resultPriority">
+                        -
+                    </strong>
+
+                </div>
+
+
+
+                <div class="result-item">
+
+                    <span>
+                        Sentiment
+                    </span>
+
+                    <strong id="resultSentiment">
+                        -
+                    </strong>
+
+                </div>
+
+
+
+                <div class="result-item">
+
+                    <span>
+                        Urgency
+                    </span>
+
+                    <strong id="resultUrgency">
+                        -
+                    </strong>
+
+                </div>
+
+
+
+                <div class="result-item">
+
+                    <span>
+                        Escalation Risk
+                    </span>
+
+                    <strong id="resultEscalation">
+                        -
+                    </strong>
+
+                </div>
+
+
+
+                <div class="result-item score-result">
+
+                    <span>
+                        Priority Score
+                    </span>
+
+                    <strong id="resultScore">
+                        -
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="reason-box">
+
+                <h3>
+                    Why this priority?
+                </h3>
+
+                <p id="resultReason"></p>
+
+            </div>
+
+
+
+            <div class="response-box">
+
+                <h3>
+                    Suggested Customer Response
+                </h3>
+
+                <p id="resultResponse"></p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= TICKETS ================= -->
+
+        <section
+                class="section-card tickets-section"
+                id="tickets">
+
+
+            <div class="section-header">
+
+                <div>
+
+                    <p class="eyebrow">
+                        CASE MANAGEMENT
+                    </p>
+
+                    <h2>
+                        Tickets
+                    </h2>
+
+                    <p>
+                        Search, filter, view, edit and delete
+                        customer support tickets.
+                    </p>
+
+                </div>
+
+
+                <button
+                        class="primary-btn"
+                        type="button"
+                        onclick="loadTickets()">
+
+                    Refresh Tickets
+
+                </button>
+
+            </div>
+
+
+
+            <!-- FILTERS -->
+
+            <div class="filters">
+
+                <select id="priorityFilter">
+
+                    <option value="">
+                        All Priorities
+                    </option>
+
+                    <option value="CRITICAL">
+                        CRITICAL
+                    </option>
+
+                    <option value="HIGH">
+                        HIGH
+                    </option>
+
+                    <option value="MEDIUM">
+                        MEDIUM
+                    </option>
+
+                    <option value="LOW">
+                        LOW
+                    </option>
+
+                </select>
+
+
+
+                <select id="categoryFilter">
+
+                    <option value="">
+                        All Categories
+                    </option>
+
+                    <option value="PAYMENT">
+                        PAYMENT
+                    </option>
+
+                    <option value="TECHNICAL">
+                        TECHNICAL
+                    </option>
+
+                    <option value="ACCOUNT">
+                        ACCOUNT
+                    </option>
+
+                    <option value="GENERAL">
+                        GENERAL
+                    </option>
+
+                </select>
+
+
+
+                <select id="statusFilter">
+
+                    <option value="">
+                        All Statuses
+                    </option>
+
+                    <option value="OPEN">
+                        OPEN
+                    </option>
+
+                    <option value="IN_PROGRESS">
+                        IN_PROGRESS
+                    </option>
+
+                    <option value="RESOLVED">
+                        RESOLVED
+                    </option>
+
+                    <option value="CLOSED">
+                        CLOSED
+                    </option>
+
+                </select>
+
+
+
+                <button
+                        class="filter-btn"
+                        type="button"
+                        onclick="applyFilters()">
+
+                    Apply Filters
+
+                </button>
+
+
+
+                <button
+                        class="clear-btn"
+                        type="button"
+                        onclick="clearFilters()">
+
+                    Clear
+
+                </button>
+
+            </div>
+
+
+
+            <!-- TABLE -->
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+                        <th>Ticket</th>
+                        <th>Category</th>
+                        <th>Priority</th>
+                        <th>Sentiment</th>
+                        <th>Urgency</th>
+                        <th>Escalation</th>
+                        <th>Score</th>
+                        <th>Status</th>
+                        <th>ACTIONS</th>
+
+                    </tr>
+
+                    </thead>
+
+
+                    <tbody id="ticketTableBody">
+
+                    <tr>
+
+                        <td
+                                colspan="10"
+                                class="loading">
+
+                            Loading tickets...
+
+                        </td>
+
+                    </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+
+        <footer class="page-footer">
+
+            Ticket Intelligence System ·
+            Java Spring Boot ·
+            MySQL ·
+            Explainable Priority Analysis
+
+        </footer>
+
+    </main>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>

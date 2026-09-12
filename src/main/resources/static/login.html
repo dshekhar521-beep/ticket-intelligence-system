@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login - Ticket Intelligence</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f7fb;
+        }
+
+        .login-container {
+            width: 400px;
+            background: white;
+            padding: 40px;
+            border-radius: 14px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.10);
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo h1 {
+            margin: 0;
+            font-size: 28px;
+            color: #1f2937;
+        }
+
+        .logo p {
+            margin-top: 8px;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.10);
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+            background: #4f46e5;
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #4338ca;
+        }
+
+        .message {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 7px;
+            font-size: 14px;
+        }
+
+        .error {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .logout {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .demo {
+            margin-top: 22px;
+            padding: 12px;
+            background: #f9fafb;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 13px;
+            color: #6b7280;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="login-container">
+
+    <div class="logo">
+        <h1>Ticket Intelligence</h1>
+        <p>AI-Powered Customer Support System</p>
+    </div>
+
+    <div id="errorMessage"
+         class="message error"
+         style="display: none;">
+        Invalid username or password.
+    </div>
+
+    <div id="logoutMessage"
+         class="message logout"
+         style="display: none;">
+        You have been logged out successfully.
+    </div>
+
+    <form action="/login" method="post">
+
+        <div class="form-group">
+            <label for="username">Username</label>
+
+            <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Enter username"
+                    required>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+
+            <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter password"
+                    required>
+        </div>
+
+        <button type="submit">
+            Sign In
+        </button>
+
+    </form>
+
+    <div class="demo">
+        Demo Login<br>
+        <strong>admin</strong> / <strong>admin123</strong>
+    </div>
+
+</div>
+
+<script>
+    const params = new URLSearchParams(window.location.search);
+
+    if (params.has("error")) {
+        document.getElementById("errorMessage").style.display = "block";
+    }
+
+    if (params.has("logout")) {
+        document.getElementById("logoutMessage").style.display = "block";
+    }
+</script>
+
+</body>
+</html>
